@@ -1,18 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
+
+import theme from './styles/theme';
 
 const H1 = styled.h1`
   text-align: center;
-  font-family: sans-serif;
-  color: blue;
+  font-family: ${(props) => props.theme.headerFont}, sans-serif;
+  color: ${(props) => props.theme.darkGreen};
   font-size: 3rem;
 `;
 
 const App = () => {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <H1>Hello!</H1>
-    </div>
+    </ThemeProvider>
   );
 };
 
