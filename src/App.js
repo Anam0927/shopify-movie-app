@@ -1,20 +1,19 @@
 import React from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import theme from './styles/theme';
-
-const H1 = styled.h1`
-  text-align: center;
-  font-family: ${(props) => props.theme.headerFont}, sans-serif;
-  color: ${(props) => props.theme.darkGreen};
-  font-size: 3rem;
-`;
+import HomePage from './Pages/Home/index';
+import SearchPage from './Pages/Search/index';
+import NomineesPage from './Pages/Nominees/index';
 
 const App = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <H1>Hello!</H1>
-    </ThemeProvider>
+    <Router>
+      <Switch>
+        <Route path='/' exact component={HomePage} />
+        <Route path='/Search' exact component={SearchPage} />
+        <Route path='/Nominees' exact component={NomineesPage} />
+      </Switch>
+    </Router>
   );
 };
 

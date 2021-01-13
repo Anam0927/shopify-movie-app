@@ -2,7 +2,7 @@ import WebFont from 'webfontloader';
 
 WebFont.load({
   google: {
-    families: ['Open Sans:400,700:latin', 'Prompt:400,700,200:latin'],
+    families: ['Open Sans:400,700:latin', 'Prompt:400,500,700,200:latin'],
   },
   timeout: 2000,
 });
