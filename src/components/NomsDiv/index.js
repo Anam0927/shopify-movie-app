@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { getNominee } from '../../helper/fetchFunction';
@@ -17,35 +18,60 @@ const NomsContainer = styled.div`
   align-items: flex-start;
 `;
 
+const NoNomineeDiv = styled.div`
+  text-align: center;
+  margin-top: 5em;
+`;
+
+const CtaButton = styled.button`
+  width: 20%;
+  margin: 1.5em auto;
+
+  border: 1px solid transparent;
+  background-color: ${(props) => props.theme.orange};
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: ${(props) => props.theme.orange};
+    background-color: transparent;
+    color: ${(props) => props.theme.orange};
+  }
+
+  padding: 0.5em 0;
+`;
+
 const ResultDiv = () => {
   const [movies, setMovies] = useState([]);
   const { nomineesArray, addNominee, removeNominee } = useNomineesContext();
 
   useEffect(() => {
-    if (nomineesArray.length > 0) {
-      nomineesArray.forEach((nominee) => {
-        getNominee(nominee)
-          .then((data) => {
-            console.log(data);
-            setMovies((nom) => [...nom, data]);
-          })
-          .catch((err) => {
-            setMovies(`${err}`);
-          });
-      });
-    }
+    nomineesArray.forEach((nominee) => {
+      getNominee(nominee)
+        .then((data) => {
+          console.log(data);
+          setMovies((nom) => [...nom, data]);
+        })
+        .catch((err) => {
+          setMovies(`${err}`);
+        });
+    });
   }, [nomineesArray]);
 
   function renderMovies() {
     if (Array.isArray(movies)) {
       if (movies.length === 0) {
         return (
-          <NomsContainer>
-            <h1>Loading</h1>
-          </NomsContainer>
+          <NoNomineeDiv>
+            <h3>No movies nominated by you yet!</h3>
+            <Link to='/Search'>
+              <CtaButton>Search your fav movies</CtaButton>
+            </Link>
+          </NoNomineeDiv>
         );
       }
-
+      console.log(movies);
       return (
         <NomsContainer>
           {movies.map((movie) => {
@@ -72,6 +98,7 @@ const ResultDiv = () => {
       );
     }
   }
+
   return renderMovies();
 };
 

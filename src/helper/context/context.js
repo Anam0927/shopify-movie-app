@@ -16,7 +16,7 @@ export function NomineesProvider({ children }) {
     }
   }
   function removeNominee(id) {
-    setNomineesArray(nomineesArray.filter((noms) => noms !== id));
+    setNomineesArray(() => nomineesArray.filter((noms) => noms !== id));
   }
 
   return (

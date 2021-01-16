@@ -5,6 +5,7 @@ import { getMovies } from '../../helper/fetchFunction';
 import { useNomineesContext } from '../../helper/context/context';
 
 import Movie from '../Result';
+import Loader from '../Loader';
 
 const ResultsContainer = styled.div`
   margin-top: 3em;
@@ -15,6 +16,14 @@ const ResultsContainer = styled.div`
   grid-column-gap: 2em;
   grid-row-gap: 2em;
   align-items: flex-start;
+`;
+
+const ErrorOrLoaderContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: ${(props) => props.theme.crimson};
 `;
 
 const ResultDiv = (props) => {
@@ -43,12 +52,16 @@ const ResultDiv = (props) => {
   }, [props.searchTerm]);
 
   function renderMovies() {
+    if (props.searchTerm === '' || props.searchTerm === undefined) {
+      return null;
+    }
+
     if (Array.isArray(movies)) {
       if (movies.length === 0) {
         return (
-          <ResultsContainer>
-            <h1>Loading</h1>
-          </ResultsContainer>
+          <ErrorOrLoaderContainer>
+            <Loader />
+          </ErrorOrLoaderContainer>
         );
       }
 
@@ -70,11 +83,24 @@ const ResultDiv = (props) => {
           })}
         </ResultsContainer>
       );
+    } else if (movies === 'Error: Error: Too many results.') {
+      return (
+        <ErrorOrLoaderContainer>
+          <Loader />
+        </ErrorOrLoaderContainer>
+      );
+    } else if (movies === 'Error: Error: Movie not found!') {
+      return (
+        <ErrorOrLoaderContainer>
+          <h3>Cannot find the movie...</h3>
+        </ErrorOrLoaderContainer>
+      );
     } else {
       return (
-        <ResultsContainer>
-          <h1>{movies}</h1>
-        </ResultsContainer>
+        <ErrorOrLoaderContainer>
+          <h3>{movies}</h3>
+          {console.log(movies)}
+        </ErrorOrLoaderContainer>
       );
     }
   }
