@@ -18,11 +18,12 @@ const GlobalReset = createGlobalStyle`
     font-size: 1em;
 
     border: none;
-    border-radius: 1em;
+    border-radius: 16px;
     line-height: 1em;
+    cursor: pointer;
 
     background-color: transparent;
-    &:hover {
+    &:hover, &:focus {
       outline: none;
     }
   }

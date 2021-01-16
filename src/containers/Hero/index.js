@@ -8,6 +8,7 @@ const HeroContainer = styled.div`
   height: 100%;
   position: relative;
   text-align: center;
+  padding: 0 2em;
 
   display: grid;
   place-content: center;
@@ -49,6 +50,9 @@ const HeroHeading = styled.h1`
 
 const HeroPara = styled.p`
   font-size: 1.75em;
+
+  // -- doc - https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4
+  // : adding a hex value at the end of hex color code for alpha value (transparency)
   text-shadow: 0 3px 6px ${(props) => `${props.theme.orange}80`};
   margin-top: 2em;
 
@@ -95,9 +99,9 @@ const Hero = () => {
       <HeroPara>
         Nominate movies that <span>YOU</span> think deserve a <span>WIN</span>
       </HeroPara>
-      <CtaButton>
-        <Link to='/Search'>Search your fav movies</Link>
-      </CtaButton>
+      <Link to='/Search'>
+        <CtaButton>Search your fav movies</CtaButton>
+      </Link>
     </HeroContainer>
   );
 };

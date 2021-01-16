@@ -6,7 +6,6 @@ import NavItemComponent from './NavItem';
 
 const NavContainer = styled.ul`
   display: flex;
-  justify-content: space-between;
 `;
 
 const NavBar = () => {

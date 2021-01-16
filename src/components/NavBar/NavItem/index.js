@@ -9,7 +9,10 @@ const NavItem = styled.li`
   font-weight: 500;
   list-style-type: none;
 
-  margin: 0 2em 10px;
+  margin: 0 2.5vw 10px;
+  &:first-child {
+    margin-left: 0;
+  }
   &:last-child {
     margin-right: 0;
   }
