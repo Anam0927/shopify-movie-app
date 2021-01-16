@@ -4,6 +4,8 @@ import styled from 'styled-components';
 const SearchContainer = styled.div`
   margin-top: 3em;
   padding: 0 2em;
+  pointer-events: ${(props) => (props.maxReached ? 'none' : 'initial')};
+  opacity: ${(props) => (props.maxReached ? 0.5 : 1)};
 `;
 
 const MainText = styled.h2`
@@ -81,22 +83,20 @@ const InputBar = styled.input`
 
 const SearchBar = (props) => {
   return (
-    <>
-      <SearchContainer>
-        <MainText>Search for your favourite movies and nominate them</MainText>
-        <SecondaryText>
-          You can nominate upto <span>5</span> movies
-        </SecondaryText>
-        <InputContainer>
-          <InputBar
-            type='text'
-            placeholder='Enter a movie name to search...'
-            value={props.searchTerm}
-            onChange={(e) => props.setSearchTerm(e.target.value)}
-          />
-        </InputContainer>
-      </SearchContainer>
-    </>
+    <SearchContainer maxReached={props.maxReached}>
+      <MainText>Search for your favourite movies and nominate them</MainText>
+      <SecondaryText>
+        You can nominate upto <span>5</span> movies
+      </SecondaryText>
+      <InputContainer>
+        <InputBar
+          type='text'
+          placeholder='Enter a movie name to search...'
+          value={props.searchTerm}
+          onChange={(e) => props.setSearchTerm(e.target.value)}
+        />
+      </InputContainer>
+    </SearchContainer>
   );
 };
 

@@ -122,9 +122,7 @@ const Movie = (props) => {
         ) : (
           <NominateButton
             onClick={() => {
-              const result = props.addNominee(props.id);
-              if (result === 'Max Reached') {
-              }
+              props.addNominee(props.id);
             }}
           >
             Nominate

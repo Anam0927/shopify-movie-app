@@ -104,6 +104,7 @@ const ResultDiv = (props) => {
       );
     }
   }
+
   return renderMovies();
 };
 

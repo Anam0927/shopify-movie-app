@@ -12,7 +12,7 @@ const NomsContainer = styled.div`
   padding: 0 2em 3em;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
   grid-column-gap: 2em;
   grid-row-gap: 2em;
   align-items: flex-start;
@@ -50,14 +50,18 @@ const ResultDiv = () => {
     nomineesArray.forEach((nominee) => {
       getNominee(nominee)
         .then((data) => {
-          console.log(data);
           setMovies((nom) => [...nom, data]);
         })
         .catch((err) => {
           setMovies(`${err}`);
         });
     });
+    return () => {
+      setMovies([]);
+    };
   }, [nomineesArray]);
+
+  return renderMovies();
 
   function renderMovies() {
     if (Array.isArray(movies)) {
@@ -93,13 +97,11 @@ const ResultDiv = () => {
     } else {
       return (
         <NomsContainer>
-          <h1>{movies}</h1>
+          <h3>{movies}</h3>
         </NomsContainer>
       );
     }
   }
-
-  return renderMovies();
 };
 
 export default ResultDiv;
