@@ -4,7 +4,7 @@ const API_KEY = process.env.REACT_APP_OMDB_API_KEY;
 async function getMovies(searchTerm, page = 1) {
   try {
     let searchResultFetch = await fetch(
-      `http://www.omdbapi.com/?s=${encodeURI(
+      `https://www.omdbapi.com/?s=${encodeURI(
         searchTerm
       )}&page=${page}&type=movie&apikey=${API_KEY}`
     );
@@ -23,7 +23,7 @@ async function getMovies(searchTerm, page = 1) {
 async function getNominee(id) {
   try {
     let searchResultFetch = await fetch(
-      `http://www.omdbapi.com/?i=${id}&type=movie&apikey=${API_KEY}`
+      `https://www.omdbapi.com/?i=${id}&type=movie&apikey=${API_KEY}`
     );
 
     let searchResult = await searchResultFetch.json();
